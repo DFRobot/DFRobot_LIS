@@ -8,18 +8,18 @@ LIS331HH      |      √       |              |
 LIS2DW12       |      √       |              |             
 IIS2DLPC      |      √       |              |              
 
-![SEN0405正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0405_TOP.png)
-![SEN0405反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0405_BOTTOM.png)
-![SEN0407正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0407_TOP.png)
-![SEN0407反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0407_BOTTOM.png)
-![SEN0408正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0408_TOP.png)
-![SEN0408反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0408_BOTTOM.png)
-![SEN0409正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0409_TOP.png)
-![SEN0409反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0409_BOTTOM.png)
-![SEN0411正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0411_TOP.png)
-![SEN0411反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0411_BOTTOM.png)
-![SEN0412正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0412_TOP.png)
-![SEN0412反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0412_BOTTOM.png)
+![SEN0405正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0405-TOP.jpg)
+![SEN0405反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0405-BOTTOM.jpg)
+![SEN0407正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0407-TOP.jpg)
+![SEN0407反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0407-BOTTOM.jpg)
+![SEN0408正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0408-TOP.jpg)
+![SEN0408反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0408-BOTTOM.jpg)
+![SEN0409正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0409-TOP.jpg)
+![SEN0409反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0409-BOTTOM.jpg)
+![SEN0411正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0411-TOP.jpg)
+![SEN0411反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0411-BOTTOM.jpg)
+![SEN0412正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0412-TOP.jpg)
+![SEN0412反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0412-BOTTOM.jpg)
 
 ## 产品链接（链接到英文商城）
     SKU：SEN0405
