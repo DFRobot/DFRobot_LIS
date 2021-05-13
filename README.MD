@@ -9,12 +9,12 @@ LIS2DW12       |      √       |              |
 IIS2DLPC      |      √       |              |              
 
 
-## 产品链接（链接到英文商城）
+## Product Link
     SKU：SEN0405
     SKU：SEN0407
     SKU：SEN0408
     SKU：SEN0409
-    SKU：SEN0411
+    SKU：[SEN0411](https://www.dfrobot.com/product-2288.html)
     SKU：SEN0412
 
 ## Table of Contents
