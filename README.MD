@@ -14,7 +14,7 @@ IIS2DLPC      |      √       |              |
     SKU：SEN0407
     SKU：SEN0408
     SKU：SEN0409
-    SKU：[SEN0411](https://www.dfrobot.com/product-2288.html)
+    SKU：SEN0411
     SKU：SEN0412
 
 ## Table of Contents
