@@ -9,6 +9,7 @@ LIS2DW12       |      √       |              |
 IIS2DLPC      |      √       |              |              
 
 ![SEN0405正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0405-TOP.jpg)
+
 ![SEN0405反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0405-BOTTOM.jpg)
 ![SEN0407正面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0407-TOP.jpg)
 ![SEN0407反面svg效果图](https://github.com/DFRobot/DFRobot_LIS/tree/master/resources/images/SEN0407-BOTTOM.jpg)
