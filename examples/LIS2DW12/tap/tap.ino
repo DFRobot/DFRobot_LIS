@@ -101,11 +101,11 @@ void setup(void){
   */
   acce.setDataRate(DFRobot_LIS2DW12::eRate_800hz);
   
-  //Enable tap detection in the X direction
+  //Enable tap detection in the Z direction
   acce.enableTapDetectionOnZ(true);
   //Enable tap detection in Y direction
   acce.enableTapDetectionOnY(true);
-  //Enable tap detection in the Z direction
+  //Enable tap detection in the X direction
   acce.enableTapDetectionOnX(true);
   //The threshold setting in the X direction 
   //Threshold(mg),Can only be used in the range of ±2g
