@@ -497,7 +497,7 @@ bool DFRobot_LIS2DW12::oriChangeDetected()
   }
 }
 
-DFRobot_LIS2DW12::eOrient_t DFRobot_LIS2DW12::getOriention()
+DFRobot_LIS2DW12::eOrient_t DFRobot_LIS2DW12::getOrientation()
 {
   uint8_t value;
   readReg(REG_SIXD_SRC,&value,1);
