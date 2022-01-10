@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-"""
+'''!
    @file wake_up.py
    @brief When the acceleration change in x, y or z direction is detected to exceed the threshold we set before, the chip will generate a wake-up event.
    @n By accessing the chip register, we can know which direction of movement wakes up the chip.  
@@ -8,16 +8,15 @@
    @n And to set the threshold by setWakeUpDur().When the acceleration change exceeds this value, the eWakeUp event will be triggered. 
    @n When using SPI, chip select pin can be modified by changing the value of RASPBERRY_PIN_CS
    @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-   @licence     The MIT License (MIT)
+   @license     The MIT License (MIT)
    @author [fengli](li.feng@dfrobot.com)
    @version  V1.0
    @date  2021-01-16
-   @get from https://www.dfrobot.com
-   @https://github.com/DFRobot/DFRobot_LIS2DW12
-"""
+   @url https://github.com/DFRobot/DFRobot_LIS
+'''
 
 import sys
-sys.path.append("../../..") # set system path to top
+sys.path.append("../..") # set system path to top
 
 from DFRobot_LIS2DW12 import *
 import time

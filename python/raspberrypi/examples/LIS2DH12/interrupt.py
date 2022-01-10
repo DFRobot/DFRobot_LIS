@@ -10,16 +10,16 @@
   @n When using SPI, chip select pin can be modified by changing the value of macro RASPBERRY_PIN_CS
   @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @license     The MIT License (MIT)
-  @author [fengli](li.feng@dfrobot.com)
+  @author [tangjie](jie.tang@dfrobot.com)
   @version  V1.0
-  @date  2021-01-16
+  @date  2022-01-05
   @url https://github.com/DFRobot/DFRobot_LIS
 '''
 
 import sys
 sys.path.append("../..") # set system path to top
 
-from DFRobot_LIS import *
+from DFRobot_LIS2DH12 import *
 import time
 
 INT1 = 26                            #Interrupt pin(BCM code), use BCM coding method, the code number is 26, corresponding to pin GPIO25
@@ -36,9 +36,8 @@ def int_pad_callback(status):
 #If you want to use I2C to drive this module, uncomment the codes below, and connect the module with Raspberry Pi via I2C port
 #The I2C address can be switched through the DIP switch (gravity version) or SDO pin (Breakout version) on the board
 I2C_BUS         = 0x01            #default use I2C1
-#ADDRESS_0       = 0x18            #sensor address0
-ADDRESS_1       = 0x19            #sensor address1
-acce = DFRobot_LIS331HH_I2C(I2C_BUS ,ADDRESS_1)
+ADDRESS_0       = 0x18            #sensor address0
+acce = DFRobot_LIS2DH12(I2C_BUS ,ADDRESS_0)
 
 # set int_Pad to input
 GPIO.setup(INT1, GPIO.IN)
@@ -53,33 +52,31 @@ print('chip id :%x'%acce.get_id())
 
 '''
 set range:Range(g)
-          LIS331HH_6G = 6  #±6G
-          LIS331HH_12G = 12  #±12G
-          LIS331HH_24G = 24   #±24G
+        LIS2DH12_2g = 0x00
+        LIS2DH12_4g = 0x10
+        LIS2DH12_8g = 0x20
+        LIS2DH12_16g = 0x30
 '''
-acce.set_range(acce.LIS331HH_6G)
-
+acce.set_range(acce.LIS2DH12_16g)
 
 '''
 Set data measurement rate
-     POWERDOWN_0HZ 
-     LOWPOWER_HALFHZ 
-     LOWPOWER_1HZ 
-     LOWPOWER_2HZ 
-     LOWPOWER_5HZ 
-     LOWPOWER_10HZ 
-     NORMAL_50HZ 
-     NORMAL_100HZ 
-     NORMAL_400HZ 
-     NORMAL_1000HZ 
+        POWERDOWN_0HZ  = 0X00
+        LOWPOWER_1Hz   = 0x10
+        LOWPOWER_10Hz  = 0x20
+        LOWPOWER_25Hz  = 0x30
+        LOWPOWER_50Hz  = 0x40
+        LOWPOWER_100Hz = 0x50
+        LOWPOWER_200Hz = 0x60
+        LOWPOWER_400Hz = 0x70 
 '''
-acce.set_acquire_rate(acce.NORMAL_50HZ)
+acce.set_acquire_rate(acce.LOWPOWER_10Hz)
 
 '''
 Set the threshold of interrupt source 1 interrupt
 threshold Threshold(g), the range is the set measurement range. 
 '''
-acce.set_int2_th(2)
+acce.set_int1_th(2)
 
 '''
 Enable interrupt
@@ -95,25 +92,21 @@ Interrupt event selection
              Z_HIGHERTHAN_TH  = 0x20<The acceleration in the z direction is greater than the threshold>
              EVENT_ERROR      = 0 <No event>
 '''
-acce.enable_int_event(acce.INT_2,acce.Y_HIGHERTHAN_TH)
+acce.enable_int_event(acce.INT_1,acce.Z_HIGHERTHAN_TH)
 time.sleep(1)
 
 while True:
     
     if(int_pad_Flag == True):
       #Check whether the interrupt event'source' is generated in interrupt 1
-      if acce.get_int1_event(acce.Y_HIGHERTHAN_TH) == True:
-         print("The acceleration in the y direction is greater than the threshold")
-      
       if acce.get_int1_event(acce.Z_HIGHERTHAN_TH) == True:
         print("The acceleration in the z direction is greater than the threshold")
-       
-      if acce.get_int1_event(acce.X_HIGHERTHAN_TH) == True:
-        print("The acceleration in the x direction is greater than the threshold")
-      
       int_pad_Flag = False
     #Get the acceleration in the three directions of xyz
-    #The measurement can be ±6g,±12g or ±24g, set by set_range() function
-    x,y,z = acce.read_acce_xyz()
-    print("Acceleration [X = %.2f mg,Y = %.2f mg,Z = %.2f mg]"%(x,y,z))
+    
+    x = acce.read_acc_x()
+    y = acce.read_acc_y()
+    z = acce.read_acc_z()
+    print("Acceleration [X = %.2d mg,Y = %.2d mg,Z = %.2d mg]"%(x,y,z))
+    
     time.sleep(0.1)

@@ -6,12 +6,11 @@
  * @n In this example, the int2/int1 pin on the module needs to be connected to the interrupt pin on the motherboard. Default UNO(2),
  * @n                Mega2560(2), Leonardo(3), microbit(P0),FireBeetle-ESP8266(D6),FireBeetle-ESP32((D6),FireBeetle-M0(6)        
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @licence     The MIT License (MIT)
+ * @license     The MIT License (MIT)
  * @author [fengli](li.feng@dfrobot.com)
  * @version  V1.0
  * @date  2021-01-16
- * @get from https://www.dfrobot.com
- * @https://github.com/DFRobot/DFRobot_LIS
+ * @url https://github.com/DFRobot/DFRobot_LIS
  */
 #include <DFRobot_LIS2DW12.h>
 

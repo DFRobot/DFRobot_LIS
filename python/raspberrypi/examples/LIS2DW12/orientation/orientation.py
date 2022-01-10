@@ -1,25 +1,24 @@
 # -*- coding:utf-8 -*-
-"""
-   @file orientation.py
-   @brief When detecting the orientation of the module, the sensor can detect the following six events:
-   @n Positive z-axis is facing up
-   @n Positive z-axis is facing down
-   @n Positive y-axis is facing up
-   @n Positive y-axis is facing down
-   @n Positive x-axis is facing up
-   @n Positive x-axis is facing down
-   @n When using SPI, chip select pin can be modified by changing the value of RASPBERRY_PIN_CS
-   @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-   @licence     The MIT License (MIT)
-   @author [fengli](li.feng@dfrobot.com)
-   @version  V1.0
-   @date  2021-01-16
-   @get from https://www.dfrobot.com
-   @https://github.com/DFRobot/DFRobot_LIS2DW12
-"""
+'''!
+  @file orientation.py
+  @brief When detecting the orientation of the module, the sensor can detect the following six events:
+  @n Positive z-axis is facing up
+  @n Positive z-axis is facing down
+  @n Positive y-axis is facing up
+  @n Positive y-axis is facing down
+  @n Positive x-axis is facing up
+  @n Positive x-axis is facing down
+  @n When using SPI, chip select pin can be modified by changing the value of RASPBERRY_PIN_CS
+  @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
+  @license     The MIT License (MIT)
+  @author [fengli](li.feng@dfrobot.com)
+  @version  V1.0
+  @date  2021-01-16
+  @url https://github.com/DFRobot/DFRobot_LIS
+'''
 
 import sys
-sys.path.append("../../..") # set system path to top
+sys.path.append("../..") # set system path to top
 
 from DFRobot_LIS2DW12 import *
 import time

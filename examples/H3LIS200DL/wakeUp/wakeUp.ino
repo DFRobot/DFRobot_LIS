@@ -6,12 +6,11 @@
  * @n will be accelerated to save power and provide sampling rate. 
  * @n When using SPI, chip select pin can be modified by changing the value of macro H3LIS200DL_CS.
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @licence     The MIT License (MIT)
+ * @license     The MIT License (MIT)
  * @author [fengli](li.feng@dfrobot.com)
  * @version  V1.0
  * @date  2021-01-16
- * @get from https://www.dfrobot.com
- * @https://github.com/DFRobot/DFRobot_LIS
+ * @url https://github.com/DFRobot/DFRobot_LIS
  */
 
 #include <DFRobot_LIS.h>

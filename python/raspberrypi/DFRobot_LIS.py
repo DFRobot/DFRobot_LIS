@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*
-""" 
+'''! 
   @file DFRobot_LIS.py
   @brief Define the basic structure of class DFRobot_LIS 
   @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  @licence     The MIT License (MIT)
+  @license     The MIT License (MIT)
   @author [fengli](li.feng@dfrobot.com)
   @version  V1.0
   @date  2021-1-30
-  @get from https://www.dfrobot.com
   @url https://github.com/DFRobot/DFRobot_LIS
-"""
+'''
 import time
 import smbus
 import spidev 
@@ -45,7 +44,7 @@ class DFRobot_LIS(object):
   ENABLE_FILTER  = 0X10       #Enable filter
   __reset = 0
   
-  '''
+  '''!
     Power mode selection, determine the frequency of data collection
     Represents the number of data collected per second
   '''
@@ -60,8 +59,8 @@ class DFRobot_LIS(object):
   NORMAL_400HZ = 0X30
   NORMAL_1000HZ = 0X38
   
-  '''
-  Sensor range selection
+  '''!
+    Sensor range selection
   '''
   H3LIS200DL_100G = 100 #±100G
   H3LIS200DL_200G = 200 #±200G
@@ -70,20 +69,20 @@ class DFRobot_LIS(object):
   LIS331HH_12G     = 12  #±12G
   LIS331HH_24G     = 24  #±24G
 
-  '''
-  #                           High-pass filter cut-off frequency configuration
-  # |--------------------------------------------------------------------------------------------------------|
-  # |                |    ft [Hz]      |        ft [Hz]       |       ft [Hz]        |        ft [Hz]        |
-  # |   mode         |Data rate = 50 Hz|   Data rate = 100 Hz |  Data rate = 400 Hz  |   Data rate = 1000 Hz |
-  # |--------------------------------------------------------------------------------------------------------|
-  # |  eCutoffMode1  |     1           |         2            |            8         |             20        |
-  # |--------------------------------------------------------------------------------------------------------|
-  # |  eCutoffMode2  |    0.5          |         1            |            4         |             10        |
-  # |--------------------------------------------------------------------------------------------------------|
-  # |  eCutoffMode3  |    0.25         |         0.5          |            2         |             5         |
-  # |--------------------------------------------------------------------------------------------------------|
-  # |  eCutoffMode4  |    0.125        |         0.25         |            1         |             2.5       |
-  # |--------------------------------------------------------------------------------------------------------|
+  '''!
+  # @n                          High-pass filter cut-off frequency configuration
+  # @n|--------------------------------------------------------------------------------------------------------|
+  # @n|                |    ft [Hz]      |        ft [Hz]       |       ft [Hz]        |        ft [Hz]        |
+  # @n|   mode         |Data rate = 50 Hz|   Data rate = 100 Hz |  Data rate = 400 Hz  |   Data rate = 1000 Hz |
+  # @n|--------------------------------------------------------------------------------------------------------|
+  # @n|  eCutoffMode1  |     1           |         2            |            8         |             20        |
+  # @n|--------------------------------------------------------------------------------------------------------|
+  # @n|  eCutoffMode2  |    0.5          |         1            |            4         |             10        |
+  # @n|--------------------------------------------------------------------------------------------------------|
+  # @n|  eCutoffMode3  |    0.25         |         0.5          |            2         |             5         |
+  # @n|--------------------------------------------------------------------------------------------------------|
+  # @n|  eCutoffMode4  |    0.125        |         0.25         |            1         |             2.5       |
+  # @n|--------------------------------------------------------------------------------------------------------|
   '''
   CUTOFF_MODE1 = 0
   CUTOFF_MODE2 = 1
@@ -91,8 +90,8 @@ class DFRobot_LIS(object):
   CUTOFF_MODE4 = 3
   SHUTDOWN     = 4
   
-  '''
-  Interrupt event
+  '''!
+    Interrupt event
   '''
   X_LOWERTHAN_TH   = 0X1  #The acceleration in the x direction is less than the threshold
   X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
@@ -109,77 +108,83 @@ class DFRobot_LIS(object):
   def __init__(self):
     __reset = 1
 
-  '''
-    @brief Initialize the function
-    @return return True(Succeed)/False(Failed)
-  '''
+  
   def begin(self):
+    '''!
+      @brief Initialize the function
+      @return return True(Succeed)/False(Failed)
+    '''
     identifier = self.read_reg(self.REG_CARD_ID)
     if identifier == H3LIS200DL or identifier == LIS331HH:
       return True
     else:
       return False
       
-  '''
-    @brief Get chip id
-    @return the 8 bit serial number
-  '''
+  
   def get_id(self):
+    '''!
+      @brief Get chip id
+      @return the 8 bit serial number
+    '''
     identifier = self.read_reg(self.REG_CARD_ID)
     return identifier
 
-  '''
-    @brief Set data measurement rate
-    @param rate rate(HZ)
-           POWERDOWN_0HZ = 0
-           LOWPOWER_HALFHZ = 0X40 
-           LOWPOWER_1HZ = 0X60
-           LOWPOWER_2HZ = 0X80
-           LOWPOWER_5HZ = 0XA0
-           LOWPOWER_10HZ = 0XC0
-           NORMAL_50HZ = 0X20
-           NORMAL_100HZ = 0X28
-           NORMAL_400HZ = 0X30
-           NORMAL_1000HZ = 0X38
-  '''
-  def set_acquire_rate(self, rate):    
+  
+  def set_acquire_rate(self, rate): 
+    '''!
+      @brief Set data measurement rate
+      @param rate rate(HZ)
+      @n     POWERDOWN_0HZ = 0
+      @n     LOWPOWER_HALFHZ = 0X40 
+      @n     LOWPOWER_1HZ = 0X60
+      @n     LOWPOWER_2HZ = 0X80
+      @n     LOWPOWER_5HZ = 0XA0
+      @n     LOWPOWER_10HZ = 0XC0
+      @n     NORMAL_50HZ = 0X20
+      @n     NORMAL_100HZ = 0X28
+      @n     NORMAL_400HZ = 0X30
+      @n     NORMAL_1000HZ = 0X38
+    '''   
     value = self.read_reg(self.REG_CTRL_REG1)
     value = value & (~(0x7 << 5))
     value = value & (~(0x3 << 3))
     value = value | rate
     self.write_reg(self.REG_CTRL_REG1,value)
 
-  '''
-    @brief Set the threshold of interrupt source 1 interrupt
-    @param threshold Threshold(g)
-  '''
+  
   def set_int1_th(self,threshold):
+    '''!
+      @brief Set the threshold of interrupt source 1 interrupt
+      @param threshold Threshold(g)
+    '''
     value = (threshold * 128)/_range
     self.write_reg(self.REG_INT1_THS,value)
 
-  '''
-    @brief Set interrupt source 2 interrupt generation threshold
-    @param threshold Threshold(g)
-  '''
+  
   def set_int2_th(self,threshold):
+    '''!
+      @brief Set interrupt source 2 interrupt generation threshold
+      @param threshold Threshold(g)
+    '''
     value = (threshold * 128)/_range
     self.write_reg(self.REG_INT2_THS,value)
   
-  '''
-    @brief Enable interrupt
-    @param source Interrupt pin selection
-             INT_1 = 0,/<int pad 1 >/
-             INT_2,/<int pad 2>/
-    @param event Interrupt event selection
-             X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
-             X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
-             Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
-             Y_HIGHERTHAN_TH  = 0X8  #The acceleration in the y direction is greater than the threshold
-             Z_LOWERTHAN_TH     = 0X10  #The acceleration in the z direction is less than the threshold
-             Z_HIGHERTHAN_TH  = 0X20  #The acceleration in the z direction is greater than the threshold
-             EVENT_ERROR      = 0  # No event
-  '''
+  
   def enable_int_event(self,source,event):
+    '''!
+      @brief Enable interrupt
+      @param source Interrupt pin selection
+      @n       INT_1 = 0,/<int pad 1 >/
+      @n       INT_2,/<int pad 2>/
+      @param event Interrupt event selection
+      @n       X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
+      @n       X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
+      @n       Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
+      @n       Y_HIGHERTHAN_TH  = 0X8  #The acceleration in the y direction is greater than the threshold
+      @n       Z_LOWERTHAN_TH     = 0X10  #The acceleration in the z direction is less than the threshold
+      @n       Z_HIGHERTHAN_TH  = 0X20  #The acceleration in the z direction is greater than the threshold
+      @n       EVENT_ERROR      = 0  # No event
+    '''
     value = 0    
     if source == self.INT_1:
       value = self.read_reg(self.REG_INT1_CFG)
@@ -188,85 +193,87 @@ class DFRobot_LIS(object):
     if self.__reset == 1:
        value = 0
        self.__reset = 0
-    value = value | event;
+    value = value | event
     #print(value)
     if source == self.INT_1:
       self.write_reg(self.REG_INT1_CFG,value)
     else:
       self.write_reg(self.REG_INT2_CFG,value)
 
-  '''
-    @brief Check whether the interrupt event'event' is generated in interrupt 1
-    @param event:Interrupt event
-             X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
-             X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
-             Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
-             Y_HIGHERTHAN_TH  = 0X8  #The acceleration in the y direction is greater than the threshold
-             Z_LOWERTHAN_TH     = 0X10  #The acceleration in the z direction is less than the threshold
-             Z_HIGHERTHAN_TH  = 0X20  #The acceleration in the z direction is greater than the threshold
-             EVENT_ERROR      = 0  # No event
-    @return true This event generated
-            false This event not generated
-  '''
+  
   def get_int1_event(self,event):
+    '''!
+      @brief Check whether the interrupt event'event' is generated in interrupt 1
+      @param event:Interrupt event
+      @n       X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
+      @n       X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
+      @n       Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
+      @n       Y_HIGHERTHAN_TH  = 0X8  #The acceleration in the y direction is greater than the threshold
+      @n       Z_LOWERTHAN_TH     = 0X10  #The acceleration in the z direction is less than the threshold
+      @n       Z_HIGHERTHAN_TH  = 0X20  #The acceleration in the z direction is greater than the threshold
+      @n       EVENT_ERROR      = 0  # No event
+      @return true This event generated/false This event not generated
+    '''
     value = self.read_reg(self.REG_INT1_SRC)
     if (value & event) >= 1:
          return True
     else:
          return False
          
-  '''
-    @brief Check whether the interrupt event'event' is generated in interrupt 2
-    @param event:Interrupt event
-             X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
-             X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
-             Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
-             Y_HIGHERTHAN_TH  = 0X8  #The acceleration in the y direction is greater than the threshold
-             Z_LOWERTHAN_TH     = 0X10  #The acceleration in the z direction is less than the threshold
-             Z_HIGHERTHAN_TH  = 0X20  #The acceleration in the z direction is greater than the threshold
-             EVENT_ERROR      = 0  # No event
-    @return true This event generated
-            false This event not generated
-  '''
+  
   def get_int2_event(self,event):
+    '''!
+      @brief Check whether the interrupt event'event' is generated in interrupt 2
+      @param event:Interrupt event
+      @n       X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
+      @n       X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
+      @n       Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
+      @n       Y_HIGHERTHAN_TH  = 0X8  #The acceleration in the y direction is greater than the threshold
+      @n       Z_LOWERTHAN_TH     = 0X10  #The acceleration in the z direction is less than the threshold
+      @n       Z_HIGHERTHAN_TH  = 0X20  #The acceleration in the z direction is greater than the threshold
+      @n       EVENT_ERROR      = 0  # No event
+      @return true This event generated/false This event not generated
+    '''
     value = self.read_reg(self.REG_INT2_SRC)
     if (value & event) >= 1:
          return True
     else:
          return False
-  '''
-    @brief Enable sleep wake function
-    @param enable:True(enable)/False(disable)
-  '''
+  
   def enable_sleep(self, enable):
+    '''!
+      @brief Enable sleep wake function
+      @param enable:True(enable)/False(disable)
+    '''
     value = 0
     if enable == True:
       value = 3
     self.write_reg(self.REG_CTRL_REG5,value)
     return 0
 
-  '''
-    @brief Set data filtering mode
-    @param mode:Four modes
-                CUTOFF_MODE1 = 0
-                CUTOFF_MODE2 = 1
-                CUTOFF_MODE3 = 2
-                CUTOFF_MODE4 = 3
-                              High-pass filter cut-off frequency configuration
-    |--------------------------------------------------------------------------------------------------------|
-    |                |    ft [Hz]      |        ft [Hz]       |       ft [Hz]        |        ft [Hz]        |
-    |   mode         |Data rate = 50 Hz|   Data rate = 100 Hz |  Data rate = 400 Hz  |   Data rate = 1000 Hz |
-    |--------------------------------------------------------------------------------------------------------|
-    |  CUTOFF_MODE1  |     1           |         2            |            8         |             20        |
-    |--------------------------------------------------------------------------------------------------------|
-    |  CUTOFF_MODE2  |    0.5          |         1            |            4         |             10        |
-    |--------------------------------------------------------------------------------------------------------|
-    |  CUTOFF_MODE3  |    0.25         |         0.5          |            2         |             5         |
-    |--------------------------------------------------------------------------------------------------------|
-    |  CUTOFF_MODE4  |    0.125        |         0.25         |            1         |             2.5       |
-    |--------------------------------------------------------------------------------------------------------|
-  '''
+  
   def set_filter_mode(self,mode):
+    '''!
+      @brief Set data filtering mode
+      @param mode:Four modes
+      @n          CUTOFF_MODE1 = 0
+      @n          CUTOFF_MODE2 = 1
+      @n          CUTOFF_MODE3 = 2
+      @n          CUTOFF_MODE4 = 3
+      @n                        High-pass filter cut-off frequency configuration
+      @n|--------------------------------------------------------------------------------------------------------|
+      @n|                |    ft [Hz]      |        ft [Hz]       |       ft [Hz]        |        ft [Hz]        |
+      @n|   mode         |Data rate = 50 Hz|   Data rate = 100 Hz |  Data rate = 400 Hz  |   Data rate = 1000 Hz |
+      @n|--------------------------------------------------------------------------------------------------------|
+      @n|  CUTOFF_MODE1  |     1           |         2            |            8         |             20        |
+      @n|--------------------------------------------------------------------------------------------------------|
+      @n|  CUTOFF_MODE2  |    0.5          |         1            |            4         |             10        |
+      @n|--------------------------------------------------------------------------------------------------------|
+      @n|  CUTOFF_MODE3  |    0.25         |         0.5          |            2         |             5         |
+      @n|--------------------------------------------------------------------------------------------------------|
+      @n|  CUTOFF_MODE4  |    0.125        |         0.25         |            1         |             2.5       |
+      @n|--------------------------------------------------------------------------------------------------------|
+    '''
     value = self.read_reg(self.REG_CTRL_REG2)
     if mode == self.SHUTDOWN:
       value = value & (~ENABLE_FILTER)
@@ -283,13 +290,14 @@ class DFRobot_H3LIS200DL_I2C(DFRobot_LIS):
     super(DFRobot_H3LIS200DL_I2C, self).__init__()
     self.i2cbus = smbus.SMBus(bus)
     
-  '''
-    @brief Set the measurement range
-    @param range:Range(g)
-                 H3LIS200DL_100G = 100   #±100g
-                 H3LIS200DL_200G = 200   #±200g
-  '''
+  
   def set_range(self,range_r):
+    '''!
+      @brief Set the measurement range
+      @param range:Range(g)
+      @n           H3LIS200DL_100G = 100   #±100g
+      @n           H3LIS200DL_200G = 200   #±200g
+    '''
     global _range 
     value = self.read_reg(self.REG_CTRL_REG4)
     _range = range_r
@@ -298,11 +306,12 @@ class DFRobot_H3LIS200DL_I2C(DFRobot_LIS):
     else:
      value = value | 0x10
 
-  '''
-    @brief Get the acceleration in the three directions of xyz
-     @return Three-axis acceleration(g), the measurement range is ±100g or ±200g, set by the set_range() function
-  '''
+  
   def read_acce_xyz(self):
+    '''!
+      @brief Get the acceleration in the three directions of xyz
+      @return Three-axis acceleration(g), the measurement range is ±100g or ±200g, set by the set_range() function
+    '''
     global _range 
     value = self.read_reg(self.REG_STATUS_REG)
     data = [0,0,0,0,0,0,0]
@@ -320,20 +329,22 @@ class DFRobot_H3LIS200DL_I2C(DFRobot_LIS):
       z = (data[5]*_range)/128
     return x,y,z
 
-  '''
-    @brief writes data to a register
-    @param reg register address
-    @param data written data
-  '''
+  
   def write_reg(self, reg, data):
-        self.i2cbus.write_i2c_block_data(self.__addr ,reg,[data])
+    '''!
+      @brief writes data to a register
+      @param reg register address
+      @param data written data
+    '''
+    self.i2cbus.write_i2c_block_data(self.__addr ,reg,[data])
         
-  '''
-    @brief read the data from the register
-    @param reg register address
-    @rerun read data
-  '''
+  
   def read_reg(self, reg):
+    '''!
+      @brief read the data from the register
+      @param reg register address
+      @rerun read data
+    '''
     self.i2cbus.write_byte(self.__addr,reg)
     time.sleep(0.01)
     rslt = self.i2cbus.read_byte(self.__addr)
@@ -350,13 +361,14 @@ class DFRobot_H3LIS200DL_SPI(DFRobot_LIS):
     self.__spi.no_cs = True
     self.__spi.max_speed_hz = speed
     
-  '''
-    @brief Set the measurement range
-    @param range:Range(g)
-                 H3LIS200DL_100G = 100   #±100g
-                 H3LIS200DL_200G = 200   #±200g
-  '''
+  
   def set_range(self,range_r):
+    '''!
+      @brief Set the measurement range
+      @param range:Range(g)
+      @n           H3LIS200DL_100G = 100   #±100g
+      @n           H3LIS200DL_200G = 200   #±200g
+    '''
     global _range 
     value = self.read_reg(self.REG_CTRL_REG4)
     _range = range_r
@@ -365,11 +377,12 @@ class DFRobot_H3LIS200DL_SPI(DFRobot_LIS):
     else:
      value = value | 0x10
 
-  '''
-    @brief Get the acceleration in the three directions of xyz
-    @return Three-axis acceleration(g), the measurement range is ±100g or ±200g, set by the set_range() function
-  '''
+  
   def read_acce_xyz(self):
+    '''!
+      @brief Get the acceleration in the three directions of xyz
+      @return Three-axis acceleration(g), the measurement range is ±100g or ±200g, set by the set_range() function
+    '''
     global _range 
     value = self.read_reg(self.REG_STATUS_REG)
     data = [0,0,0,0,0,0,0]
@@ -388,28 +401,30 @@ class DFRobot_H3LIS200DL_SPI(DFRobot_LIS):
 
     return x,y,z
 
-  '''
-    @brief writes data to a register
-    @param reg register address
-    @param data written data
-  '''
+  
   def write_reg(self, reg, data):
-     GPIO.output(self.__cs, GPIO.LOW)
-     self.__spi.writebytes([reg,data])
-     GPIO.output(self.__cs, GPIO.HIGH)
-     #self._spi.transfer(data)
-  '''
-    @brief read the data from the register
-    @param reg register address
-    @return read data
-  '''
+    '''!
+      @brief writes data to a register
+      @param reg register address
+      @param data written data
+    '''
+    GPIO.output(self.__cs, GPIO.LOW)
+    self.__spi.writebytes([reg,data])
+    GPIO.output(self.__cs, GPIO.HIGH)
+    #self._spi.transfer(data)
+  
   def read_reg(self, reg):
-     GPIO.output(self.__cs, GPIO.LOW)
-     self.__spi.writebytes([reg|self.SPI_READ_BIT])
-     time.sleep(0.01)
-     data = self.__spi.readbytes(1)
-     GPIO.output(self.__cs, GPIO.HIGH)
-     return  data[0]
+    '''!
+      @brief read the data from the register
+      @param reg register address
+      @return read data
+    '''
+    GPIO.output(self.__cs, GPIO.LOW)
+    self.__spi.writebytes([reg|self.SPI_READ_BIT])
+    time.sleep(0.01)
+    data = self.__spi.readbytes(1)
+    GPIO.output(self.__cs, GPIO.HIGH)
+    return  data[0]
      
 class DFRobot_LIS331HH_I2C(DFRobot_LIS): 
   def __init__(self ,bus ,addr):
@@ -417,14 +432,15 @@ class DFRobot_LIS331HH_I2C(DFRobot_LIS):
     super(DFRobot_LIS331HH_I2C, self).__init__()
     self.i2cbus = smbus.SMBus(bus)
     
-  '''
-    @brief Set the measurement range
-    @param range:Range(g)
-                 LIS331HH_6G  = 6  #±6G
-                 LIS331HH_12G = 12 #±12G
-                 LIS331HH_24G = 24 #±24G
-  '''
+  
   def set_range(self,range_r):
+    '''!
+      @brief Set the measurement range
+      @param range:Range(g)
+      @n           LIS331HH_6G  = 6  #±6G
+      @n           LIS331HH_12G = 12 #±12G
+      @n           LIS331HH_24G = 24 #±24G
+    '''
     global _range   
     value = self.read_reg(self.REG_CTRL_REG4)
     _range = range_r
@@ -437,11 +453,12 @@ class DFRobot_LIS331HH_I2C(DFRobot_LIS):
      value = value | (0x03<<4)
     self.write_reg(self.REG_CTRL_REG4,value)
 
-  '''
-    @brief Get the acceleration in the three directions of xyz
-    @return Three-axis acceleration(mg), the measurement range is ±6g, ±12g or ±24g, set by the set_range() function
-  '''
+  
   def read_acce_xyz(self):
+    '''!
+      @brief Get the acceleration in the three directions of xyz
+      @return Three-axis acceleration(mg), the measurement range is ±6g, ±12g or ±24g, set by the set_range() function
+    '''
     global _range   
     value = self.read_reg(self.REG_STATUS_REG)
     data = [0,0,0,0,0,0,0]
@@ -463,19 +480,21 @@ class DFRobot_LIS331HH_I2C(DFRobot_LIS):
       z = (z*1000*_range)/(256*128)
     return x,y,z
     
-  '''
-    @brief writes data to a register
-    @param reg register address
-    @param data written data
-  '''
+  
   def write_reg(self, reg, data):
-        self.i2cbus.write_i2c_block_data(self.__addr ,reg,[data])
-  '''
-    @brief read the data from the register
-    @param reg register address
-    @return read data
-  '''
+    '''!
+      @brief writes data to a register
+      @param reg register address
+      @param data written data
+    '''
+    self.i2cbus.write_i2c_block_data(self.__addr ,reg,[data])
+  
   def read_reg(self, reg):
+    '''!
+      @brief read the data from the register
+      @param reg register address
+      @return read data
+    '''
     self.i2cbus.write_byte(self.__addr,reg)
     time.sleep(0.01)
     rslt = self.i2cbus.read_byte(self.__addr)
@@ -493,14 +512,15 @@ class DFRobot_LIS331HH_SPI(DFRobot_LIS):
     self.__spi.no_cs = True
     self.__spi.max_speed_hz = speed
     
-  '''
-    @brief Set the measurement range
-    @param range:Range(g)
-                 LIS331HH_6G  = 6  #±6G
-                 LIS331HH_12G = 12 #±12G
-                 LIS331HH_24G = 24 #±24G
-  '''
+  
   def set_range(self,range_r):
+    '''!
+      @brief Set the measurement range
+      @param range:Range(g)
+      @n           LIS331HH_6G  = 6  #±6G
+      @n           LIS331HH_12G = 12 #±12G
+      @n           LIS331HH_24G = 24 #±24G
+    '''
     global _range   
     value = self.read_reg(self.REG_CTRL_REG4)
     _range = range_r
@@ -513,11 +533,12 @@ class DFRobot_LIS331HH_SPI(DFRobot_LIS):
      value = value | (0x03<<4)
     self.write_reg(self.REG_CTRL_REG4,value)
 
-  '''
-    @brief Get the acceleration in the three directions of xyz
-    @return Three-axis acceleration(mg), the measurement range is ±6g, ±12g or ±24g, set by the set_range() function
-  '''
+  
   def read_acce_xyz(self):
+    '''!
+      @brief Get the acceleration in the three directions of xyz
+      @return Three-axis acceleration(mg), the measurement range is ±6g, ±12g or ±24g, set by the set_range() function
+    '''
     global _range   
     value = self.read_reg(self.REG_STATUS_REG)
     data = [0,0,0,0,0,0,0]
@@ -540,27 +561,29 @@ class DFRobot_LIS331HH_SPI(DFRobot_LIS):
       z = (z*1000*_range)/(256*128)
     return x,y,z
 
-  '''
-    @brief writes data to a register
-    @param reg register address
-    @param data written data
-  '''
+  
   def write_reg(self, reg, data):
-     GPIO.output(self.__cs, GPIO.LOW)
-     self.__spi.writebytes([reg,data])
-     GPIO.output(self.__cs, GPIO.HIGH)
-     #self._spi.transfer(data)
-  '''
-    @brief read the data from the register
-    @param reg register address
-    @return read data
-  '''
+    '''!
+      @brief writes data to a register
+      @param reg register address
+      @param data written data
+    '''
+    GPIO.output(self.__cs, GPIO.LOW)
+    self.__spi.writebytes([reg,data])
+    GPIO.output(self.__cs, GPIO.HIGH)
+    #self._spi.transfer(data)
+  
   def read_reg(self, reg):
-     GPIO.output(self.__cs, GPIO.LOW)
-     self.__spi.writebytes([reg|self.SPI_READ_BIT])
-     time.sleep(0.01)
-     data = self.__spi.readbytes(1)
-     GPIO.output(self.__cs, GPIO.HIGH)
-     #print(data)
-     return  data[0]
+    '''!
+      @brief read the data from the register
+      @param reg register address
+      @return read data
+    '''
+    GPIO.output(self.__cs, GPIO.LOW)
+    self.__spi.writebytes([reg|self.SPI_READ_BIT])
+    time.sleep(0.01)
+    data = self.__spi.readbytes(1)
+    GPIO.output(self.__cs, GPIO.HIGH)
+    #print(data)
+    return  data[0]
 

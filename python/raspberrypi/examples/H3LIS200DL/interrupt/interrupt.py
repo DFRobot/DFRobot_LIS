@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-"""
+'''!
    @file interrupt.py
    @brief Interrupt detection
    @n In this example, the enable eZHigherThanTh interrupt event means when the acceleration in the Z direction exceeds the threshold
@@ -9,16 +9,15 @@
    @n For a detailed explanation of each of them, please look up the comments of function enableInterruptEvent()
    @n When using SPI, chip select pin can be modified by changing the value of macro RASPBERRY_PIN_CS
    @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-   @licence     The MIT License (MIT)
+   @license     The MIT License (MIT)
    @author [fengli](li.feng@dfrobot.com)
    @version  V1.0
    @date  2021-01-16
-   @get from https://www.dfrobot.com
-   @https://github.com/DFRobot/DFRobot_LIS
-"""
+   @url https://github.com/DFRobot/DFRobot_LIS
+'''
 
 import sys
-sys.path.append("../../..") # set system path to top
+sys.path.append("../..") # set system path to top
 
 from DFRobot_LIS import *
 import time

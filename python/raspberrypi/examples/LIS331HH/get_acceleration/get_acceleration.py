@@ -1,19 +1,18 @@
 # -*- coding:utf-8 -*-
-"""
+'''!
   @file get_acceleration.py
   @brief Get the acceleration in x, y, z directions, its measurement range can be ±6g, ±12g or ±24g
   @n When using SPI, chip select pin can be modified by changing the value of RASPBERRY_PIN_CS
   @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-  @licence     The MIT License (MIT)
+  @license     The MIT License (MIT)
   @author [fengli](li.feng@dfrobot.com)
   @version  V1.0
   @date  2021-01-16
-  @get from https://www.dfrobot.com
-  @https://github.com/DFRobot/DFRobot_LIS
-"""
+  @url https://github.com/DFRobot/DFRobot_LIS
+'''
 
 import sys
-sys.path.append("../../..") # set system path to top
+sys.path.append("../..") # set system path to top
 from DFRobot_LIS import *
 import time
 

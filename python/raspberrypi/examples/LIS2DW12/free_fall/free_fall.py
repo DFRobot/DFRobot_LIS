@@ -1,20 +1,19 @@
 # -*- coding:utf-8 -*-
-"""
+'''!
    @file free_fall.py
    @brief  Sensor module free fall detection, set the free fall time by set_free_fall_Dur() function to adjust the sensitivity of the detection
    @n The shorter the free fall time we set, the easier for the module to detect the free fall event
    @n When using SPI, chip select pin can be modified by changing the value of RASPBERRY_PIN_CS
    @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
-   @licence     The MIT License (MIT)
+   @license     The MIT License (MIT)
    @author [fengli](li.feng@dfrobot.com)
    @version  V1.0
    @date  2021-01-16
-   @get from https://www.dfrobot.com
-   @https://github.com/DFRobot/DFRobot_LIS2DW12
-"""
+   @url https://github.com/DFRobot/DFRobot_LIS
+'''
 
 import sys
-sys.path.append("../../..") # set system path to top
+sys.path.append("../..") # set system path to top
 
 from DFRobot_LIS2DW12 import *
 import time

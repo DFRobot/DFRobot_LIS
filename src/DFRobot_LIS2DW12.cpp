@@ -2,12 +2,11 @@
  * @file DFRobot_LIS2DW12.cpp
  * @brief The realization of the class DFRobot_LIS2DW12
  * @copyright   Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
- * @licence     The MIT License (MIT)
+ * @license     The MIT License (MIT)
  * @author [fengli](li.feng@dfrobot.com)
  * @version  V1.0
  * @date  2020-12-23
- * @get from https://www.dfrobot.com
- * @https://github.com/DFRobot/DFRobot_LIS2DW12
+ * @url https://github.com/DFRobot/DFRobot_LIS
  */
 
 #include <DFRobot_LIS2DW12.h>
@@ -129,7 +128,7 @@ void DFRobot_LIS2DW12::setRange(eRange_t range){
   _range1 = range;
   value = value &(~(3<<4));
   switch(range){
-    case e2_g:{
+    case e2_g:{ 
      _range = 0.061f;
      value = value | 0;
      break;
@@ -408,8 +407,6 @@ void DFRobot_LIS2DW12::set6DThreshold(e6DTh_t degree)
 
 void DFRobot_LIS2DW12::setInt2Event(eInt2Event_t event)
 {
-
-
   uint8_t value1 = 0;
   uint8_t value2 = 0;
   uint8_t value3 = 0;
