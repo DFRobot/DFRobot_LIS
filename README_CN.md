@@ -60,12 +60,12 @@ LIS2DW12            |      √       |              |
 IIS2DLPC            |      √       |              |        
 IIS2DH12            |      √       |              |              
 
-![产品效果图片](../../resources/images/SEN0405_TOP.jpg)
-![产品效果图片](../../resources/images/SEN0407_TOP.jpg)
-![产品效果图片](../../resources/images/SEN0408_TOP.jpg)
-![产品效果图片](../../resources/images/SEN0409_TOP.jpg)
-![产品效果图片](../../resources/images/SEN0411_TOP.jpg)
-![产品效果图片](../../resources/images/SEN0412_TOP.jpg)
+![产品效果图片](./resources/images/SEN0405_TOP.jpg)
+![产品效果图片](./resources/images/SEN0407_TOP.jpg)
+![产品效果图片](./resources/images/SEN0408_TOP.jpg)
+![产品效果图片](./resources/images/SEN0409_TOP.jpg)
+![产品效果图片](./resources/images/SEN0411_TOP.jpg)
+![产品效果图片](./resources/images/SEN0412_TOP.jpg)
 
 ## 产品链接(https://www.dfrobot.com)
     SKU:SEN0405
