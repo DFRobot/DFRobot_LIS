@@ -204,7 +204,7 @@ class DFRobot_LIS(object):
   def get_int1_event(self,event):
     '''!
       @brief Check whether the interrupt event'event' is generated in interrupt 1
-      @param event Interrupt event
+      @param event:Interrupt event
       @n       X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
       @n       X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
       @n       Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
@@ -224,7 +224,7 @@ class DFRobot_LIS(object):
   def get_int2_event(self,event):
     '''!
       @brief Check whether the interrupt event'event' is generated in interrupt 2
-      @param event Interrupt event
+      @param event:Interrupt event
       @n       X_LOWERTHAN_TH     = 0X1  #The acceleration in the x direction is less than the threshold
       @n       X_HIGHERTHAN_TH  = 0X2  #The acceleration in the x direction is greater than the threshold
       @n       Y_LOWERTHAN_TH     = 0X4  #The acceleration in the y direction is less than the threshold
@@ -243,7 +243,7 @@ class DFRobot_LIS(object):
   def enable_sleep(self, enable):
     '''!
       @brief Enable sleep wake function
-      @param enable True(enable)/False(disable)
+      @param enable:True(enable)/False(disable)
     '''
     value = 0
     if enable == True:
@@ -255,7 +255,7 @@ class DFRobot_LIS(object):
   def set_filter_mode(self,mode):
     '''!
       @brief Set data filtering mode
-      @param mode Four modes
+      @param mode:Four modes
       @n          CUTOFF_MODE1 = 0
       @n          CUTOFF_MODE2 = 1
       @n          CUTOFF_MODE3 = 2
@@ -294,7 +294,7 @@ class DFRobot_H3LIS200DL_I2C(DFRobot_LIS):
   def set_range(self,range_r):
     '''!
       @brief Set the measurement range
-      @param range_r Range(g)
+      @param range:Range(g)
       @n           H3LIS200DL_100G = 100   #±100g
       @n           H3LIS200DL_200G = 200   #±200g
     '''
@@ -343,7 +343,7 @@ class DFRobot_H3LIS200DL_I2C(DFRobot_LIS):
     '''!
       @brief read the data from the register
       @param reg register address
-      @return read data
+      @rerun read data
     '''
     self.i2cbus.write_byte(self.__addr,reg)
     time.sleep(0.01)
@@ -365,7 +365,7 @@ class DFRobot_H3LIS200DL_SPI(DFRobot_LIS):
   def set_range(self,range_r):
     '''!
       @brief Set the measurement range
-      @param range_r Range(g)
+      @param range:Range(g)
       @n           H3LIS200DL_100G = 100   #±100g
       @n           H3LIS200DL_200G = 200   #±200g
     '''
@@ -436,7 +436,7 @@ class DFRobot_LIS331HH_I2C(DFRobot_LIS):
   def set_range(self,range_r):
     '''!
       @brief Set the measurement range
-      @param range_r Range(g)
+      @param range:Range(g)
       @n           LIS331HH_6G  = 6  #±6G
       @n           LIS331HH_12G = 12 #±12G
       @n           LIS331HH_24G = 24 #±24G
@@ -516,7 +516,7 @@ class DFRobot_LIS331HH_SPI(DFRobot_LIS):
   def set_range(self,range_r):
     '''!
       @brief Set the measurement range
-      @param range_r Range(g)
+      @param range:Range(g)
       @n           LIS331HH_6G  = 6  #±6G
       @n           LIS331HH_12G = 12 #±12G
       @n           LIS331HH_24G = 24 #±24G

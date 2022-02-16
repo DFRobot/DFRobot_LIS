@@ -62,16 +62,15 @@ public:
   #define REG_TAP_THS_Z    0x32     ///<Threshold for tap recognition @ FS = ±2 g on Z direction
   #define REG_INT_DUR      0x33     ///<Interrupt duration register
   #define REG_WAKE_UP_THS  0x34     ///<Wakeup threshold register
-  #define SPI_READ_BIT     0X80     ///<bit 0: RW bit. When 0, the data DI(7:0) is written into the device. When 1, the data DO(7:0) 
-from the device is read.*/
+  #define SPI_READ_BIT     0X80     ///<bit 0: RW bit. When 0, the data DI(7:0) is written into the device. When 1, the data DO(7:0) from the device is read.*/
 
 public:
 
-
 /**
-  Power mode, there are two modes for the sensor to measure acceleration
-  1.Continuous measurement. In this mode, the sensor will continuously measure and store the data in data register.
-  2.Single data conversion on demand mode. In this mode, the sensor will make a measurement only when it receives an external request.
+ * @fn  ePowerMode_t
+ * @brief Power mode, there are two modes for the sensor to measure acceleration
+ * @n 1.Continuous measurement. In this mode, the sensor will continuously measure and store the data in data register.
+ * @n 2.Single data conversion on demand mode. In this mode, the sensor will make a measurement only when it receives an external request.
  */
 typedef enum{
   eHighPerformance_14bit                  = 0x04,/**<High-Performance Mode,14-bit resolution>*/
@@ -95,7 +94,8 @@ typedef enum{
 }ePowerMode_t;
 
 /**
-  Sensor range
+ * @fn eRange_t
+ * @brief Sensor range
  */
 typedef enum{
   e2_g     = 2, /**<±2g>*/
@@ -105,7 +105,8 @@ typedef enum{
 }eRange_t;
 
 /**
-  Filtering mode
+ * @fn ePath_t
+ * @brief Filtering mode
  */
 typedef enum {
   eLPF        = 0x00,/**< low-pass filter path selected>*/
@@ -113,7 +114,8 @@ typedef enum {
 } ePath_t;
 
 /**
-  Bandwidth selection
+ * @fn eBWFilter_t
+ * @brief Bandwidth selection
  */
 typedef enum {
   eRateDiv_2     = 0,/**<Rate/2 (up to Rate = 800 Hz, 400 Hz when Rate = 1600 Hz)>*/
@@ -123,7 +125,8 @@ typedef enum {
 }eBWFilter_t;
 
 /**
-  Data collection rate
+ * @fn  eRate_t
+ * @brief Data collection rate
  */
 typedef enum {
   eRate_0hz            = 0x00,/**<Measurement off>*/
@@ -140,7 +143,8 @@ typedef enum {
 } eRate_t;
 
 /**
-  Motion detection mode
+ * @fn eActDetect_t
+ * @brief Motion detection mode
  */
 typedef enum {
   eNoDetection        = 0,/**<No detection>*/
@@ -149,7 +153,8 @@ typedef enum {
 } eActDetect_t;
 
 /**
-  Interrupt source 1 trigger event setting
+ * @fn eInt1Event_t
+ * @brief Interrupt source 1 trigger event setting
  */
 typedef enum{
   eDoubleTap    = 0x08,/**<Double tap event>*/
@@ -160,7 +165,8 @@ typedef enum{
 }eInt1Event_t;
 
 /**
-  Interrupt source 2 trigger event setting
+ * @fn eInt2Event_t
+ * @brief Interrupt source 2 trigger event setting
  */
 typedef enum{
   eSleepChange = 0x40,/**<Sleep change status routed to INT2 pad>*/
@@ -168,7 +174,8 @@ typedef enum{
 }eInt2Event_t;
 
 /**
-  tap detection mode
+ * @fn eTapMode_t
+ * @brief tap detection mode
  */
 typedef enum {
   eOnlySingle          = 0,/**<Only detect tap events.>*/
@@ -176,7 +183,8 @@ typedef enum {
 } eTapMode_t;
 
 /**
-  Position detection angle transition threshold
+ * @fn e6DTh_t
+ * @brief Position detection angle transition threshold
  */
 typedef enum {
   eDegrees80  ,/**<80 degrees.>*/
@@ -186,7 +194,8 @@ typedef enum {
 } e6DTh_t;
 
 /**
-  tap or double tap
+ * @fn  eTap_t
+ * @brief tap or double tap
  */
 typedef enum {
   eSTap  = 0 ,/**<single tap>*/
@@ -195,7 +204,8 @@ typedef enum {
 } eTap_t;
 
 /**
-  which direction is tap event detected
+ * @fn eTapDir_t
+ * @brief which direction is tap event detected
  */
 typedef enum {
   eDirXUp   = 0,/**<Tap is detected in the positive direction of X>*/
@@ -208,7 +218,8 @@ typedef enum {
 }eTapDir_t;
 
 /**
-  which direction is wake up event detected
+ * @fn eWakeUpDir_t
+ * @brief which direction is wake up event detected
  */
 typedef enum {
   eDirX = 0,/**<Chip woken up by motion in X direction>*/
@@ -218,7 +229,8 @@ typedef enum {
 }eWakeUpDir_t;
 
 /**
-  orientation
+ * @fn eOrient_t
+ * @brief orientation
  */
 typedef enum {
   eXDown = 0 , /**<X is now down>*/
@@ -228,6 +240,7 @@ typedef enum {
   eZDown = 4 , /**<Z is now down>*/
   eZUp   = 5 , /**<Z is now up>*/
 } eOrient_t;
+
 public:
   DFRobot_LIS2DW12();
   
@@ -274,7 +287,7 @@ public:
    * @n        eRateDiv_2  ,/<Rate/2 (up to Rate = 800 Hz, 400 Hz when Rate = 1600 Hz)>/
    * @n        eRateDiv_4  ,/<Rate/4 (High Power/Low power)>*
    * @n        eRateDiv_10 ,/<Rate/10 (HP/LP)>/
-   * @n         eRateDiv_20 ,/<Rate/20 (HP/LP)>/
+   * @n        eRateDiv_20 ,/<Rate/20 (HP/LP)>/
    */
   void setFilterBandwidth(eBWFilter_t bw);
   
@@ -544,7 +557,7 @@ public:
    * @brief Tap detection, can detect it is double tap or single tap
    * @return   eSTap       /<Single Tap>/
    * @n        eDTap       /<double Tap>/
-   * @n        eNoTap,     //No tap         
+   * @n        eNoTap,     /<No tap>         
    */
   eTap_t tapDetect();
   

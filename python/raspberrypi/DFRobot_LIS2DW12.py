@@ -212,7 +212,7 @@ class DFRobot_LIS2DW12(object):
   def set_range(self,range_r):
     '''!
       @brief Set the measurement range
-      @param range_r Range
+      @param range Range
       @n           RANGE_2G     #±2g
       @n           RANGE_4G     #±4g
       @n           RANGE_8G     #±8g
@@ -753,11 +753,11 @@ class DFRobot_LIS2DW12(object):
     '''!
       @brief Only in 6D (facing up/down/left/right/forward/backward) state can the function get the orientation of 
       @n     the sensor relative to the positive z-axis.
-      @n         X_UP     # X is now up
-      @n         Y_DOWN   # Y is now down
-      @n         Y_UP     # Y is now up
-      @n         Z_DOWN   # Z is now down
-      @n         Z_UP     # Z is now up
+      @n         X_UP     #X is now up
+      @n         Y_DOWN   #Y is now down
+      @n         Y_UP     #Y is now up
+      @n         Z_DOWN   #Z is now down
+      @n         Z_UP     #Z is now up
     '''
     value = self.read_reg(self.REG_SIXD_SRC)
     orient = self.ERROR
@@ -781,7 +781,7 @@ class DFRobot_LIS2DW12(object):
       @brief Tap detection, can detect it is double tap or single tap
       @return   S_TAP       #single tap
       @n        D_TAP       #double tap
-      @n        NO_TAP      #no tap
+      @n        NO_TAP,     #no tap
     '''
     value = self.read_reg(self.REG_TAP_SRC)
     #print(value)
@@ -926,7 +926,7 @@ class DFRobot_LIS2DW12_I2C(DFRobot_LIS2DW12):
     '''!
       @brief writes data to a register
       @param reg register address
-      @param data written data
+      @param value written data
     '''
     self.i2cbus.write_i2c_block_data(self.__addr ,reg,[data])
 

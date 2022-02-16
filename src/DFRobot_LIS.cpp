@@ -83,7 +83,6 @@ void DFRobot_LIS::enableInterruptEvent(eInterruptSource_t source,eInterruptEvent
 bool DFRobot_LIS::getInt1Event(eInterruptEvent_t event)
 {
   uint8_t reg = 0;
-  uint8_t regester = REG_INT1_SRC;
   readReg(REG_INT1_SRC,&reg,1);
   DBG(reg);
   if(reg & (1 << event))  return true;
@@ -215,6 +214,7 @@ bool DFRobot_H3LIS200DL_I2C::setRange(eRange_t range){
    }
   DBG(reg);
   writeReg(REG_CTRL_REG4,&reg,1);
+  return true;
 }
 uint8_t DFRobot_H3LIS200DL_I2C::writeReg(uint8_t reg, const void * pBuf, size_t size)
 {
@@ -229,6 +229,7 @@ uint8_t DFRobot_H3LIS200DL_I2C::writeReg(uint8_t reg, const void * pBuf, size_t 
     _pWire->write(_pBuf[i]);
   }
   _pWire->endTransmission();
+  return 0;
 }
 
 uint8_t DFRobot_H3LIS200DL_I2C::readReg(uint8_t reg, void* pBuf, size_t size)
@@ -331,7 +332,7 @@ bool DFRobot_H3LIS200DL_SPI::setRange(eRange_t range){
    }
   DBG(reg);
   writeReg(REG_CTRL_REG4,&reg,1);
-
+  return true;
 }
 uint8_t DFRobot_H3LIS200DL_SPI::readReg(uint8_t reg,void * pBuf ,size_t size){
   if(pBuf == NULL){
@@ -373,6 +374,7 @@ uint8_t  DFRobot_H3LIS200DL_SPI::writeReg(uint8_t reg,const void *pBuf,size_t si
 
   SPI.endTransaction();
   digitalWrite(_cs,1);
+  return 1;
 }
 DFRobot_LIS331HH_I2C::DFRobot_LIS331HH_I2C(TwoWire * pWire,uint8_t addr)
 {
@@ -396,11 +398,11 @@ bool DFRobot_LIS331HH_I2C::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &a
       readReg(REG_OUT_Z_H+i,&sensorData[i],1);
     }
     a = ((int8_t)sensorData[1])*256+(int8_t)sensorData[0];
-    accx = (a * 1000 * (uint8_t)_range)/(256*128);
+    accx = (a * 1000 * (uint32_t)_range)/(32768);
     b = ((int8_t)sensorData[3])*256+(int8_t)sensorData[2];
-    accy = (b * 1000 * (uint8_t)_range)/(256*128);
+    accy = (b * 1000 * (uint32_t)_range)/(32768);
     c = ((int8_t)sensorData[5])*256+(int8_t)sensorData[4];
-    accz = (c * 1000 * (uint8_t)_range)/(256*128);
+    accz = (c * 1000 * (uint32_t)_range)/(32768);
     return true;
   }
 return false;
@@ -427,9 +429,12 @@ bool DFRobot_LIS331HH_I2C::setRange(eRange_t range){
      reg = reg | (0x03<<4);
      break;
    }
+  default:
+    break;
   }
   DBG(reg);
   writeReg(REG_CTRL_REG4,&reg,1);
+  return true;
 }
 int32_t DFRobot_LIS331HH_I2C::readAccX(){
   uint8_t reg = 0;
@@ -442,9 +447,9 @@ int32_t DFRobot_LIS331HH_I2C::readAccX(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint8_t)_range)/(256*128);
+    a = -(a * 1000 * (uint32_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint8_t)_range)/(256*128);
+    a = (a * 1000 * (uint32_t)_range)/(32768);
   #endif
 
   return a;
@@ -460,9 +465,9 @@ int32_t DFRobot_LIS331HH_I2C::readAccY(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint8_t)_range)/(256*128);
+    a = -(a * 1000 * (uint32_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint8_t)_range)/(256*128);
+    a = (a * 1000 * (uint32_t)_range)/(32768);
   #endif
 
      return a;
@@ -477,9 +482,9 @@ int32_t DFRobot_LIS331HH_I2C::readAccZ(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint8_t)_range)/(256*128);
+    a = -(a * 1000 * (uint32_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint8_t)_range)/(256*128);
+    a = (a * 1000 * (uint32_t)_range)/(32768);
   #endif
      return a;
 }
@@ -496,6 +501,7 @@ uint8_t DFRobot_LIS331HH_I2C::writeReg(uint8_t reg, const void * pBuf, size_t si
     _pWire->write(_pBuf[i]);
   }
   _pWire->endTransmission();
+  return 1;
 }
 
 uint8_t DFRobot_LIS331HH_I2C::readReg(uint8_t reg, void* pBuf, size_t size)
@@ -544,11 +550,11 @@ bool DFRobot_LIS331HH_SPI::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &a
       readReg(REG_OUT_Z_H+i,&sensorData[i],1);
     }
     a = ((int8_t)sensorData[1])*256+(int8_t)sensorData[0];
-    accx = (a * 1000 * (uint8_t)_range)/(256*128);
+    accx = (a * 1000 * (uint8_t)_range)/(32768);
     b = ((int8_t)sensorData[3])*256+(int8_t)sensorData[2];
-    accy = (b * 1000 * (uint8_t)_range)/(256*128);
+    accy = (b * 1000 * (uint8_t)_range)/(32768);
     c = ((int8_t)sensorData[5])*256+(int8_t)sensorData[4];
-    accz = (c * 1000 * (uint8_t)_range)/(256*128);
+    accz = (c * 1000 * (uint8_t)_range)/(32768);
     return true;
   }
 return false;
@@ -575,9 +581,12 @@ bool DFRobot_LIS331HH_SPI::setRange(eRange_t range){
      reg = reg | (0x03<<4);
      break;
    }
+   default:
+    break;
   }
   DBG(reg);
   writeReg(REG_CTRL_REG4,&reg,1);
+  return true;
 }
 int32_t DFRobot_LIS331HH_SPI::readAccX(){
   uint8_t reg = 0;
@@ -590,9 +599,9 @@ int32_t DFRobot_LIS331HH_SPI::readAccX(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint8_t)_range)/(256*128);
+    a = -(a * 1000 * (uint32_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint8_t)_range)/(256*128);
+    a = (a * 1000 * (uint32_t)_range)/(32768);
   #endif
   return a;
 }
@@ -607,9 +616,9 @@ int32_t DFRobot_LIS331HH_SPI::readAccY(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint8_t)_range)/(256*128);
+    a = -(a * 1000 * (uint32_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint8_t)_range)/(256*128);
+    a = (a * 1000 * (uint32_t)_range)/(32768);
   #endif
    return a;
 }
@@ -624,9 +633,9 @@ int32_t DFRobot_LIS331HH_SPI::readAccZ(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint8_t)_range)/(256*128);
+    a = -(a * 1000 * (uint32_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint8_t)_range)/(256*128);
+    a = (a * 1000 * (uint32_t)_range)/(32768);
   #endif
      return a;
 }
@@ -653,7 +662,6 @@ uint8_t DFRobot_LIS331HH_SPI::readReg(uint8_t reg,void * pBuf ,size_t size){
   _pSpi->endTransaction();
   digitalWrite(_cs,1);
   return count;
-
 }
 
 uint8_t  DFRobot_LIS331HH_SPI::writeReg(uint8_t reg,const void *pBuf,size_t size){
@@ -672,4 +680,5 @@ uint8_t  DFRobot_LIS331HH_SPI::writeReg(uint8_t reg,const void *pBuf,size_t size
 
   SPI.endTransaction();
   digitalWrite(_cs,1);
+  return 1;
 }

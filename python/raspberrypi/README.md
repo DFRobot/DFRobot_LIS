@@ -1,4 +1,7 @@
 # DFRobot_LIS
+
+* [中文版](./README_CN.md)
+
 The H3LIS200DL is a low-power high performance 3-axis linear accelerometer 
 belonging to the “nano” family, with digital I2C/SPI 
 serial interface standard output. <br>
@@ -262,12 +265,12 @@ python get_acceleration.py
     '''
   
   def set_filter_path(self,path)
-  '''
-    @brief Set the filter processing mode
-    @param path path of filtering
-    @n            LPF          #Low pass filter
-    @n            HPF          #High pass filter
-  '''
+    '''
+      @brief Set the filter processing mode
+      @param path path of filtering
+      @n            LPF          #Low pass filter
+      @n            HPF          #High pass filter
+    '''
   
   def set_filter_bandwidth(self,bw)  
     '''
@@ -322,7 +325,7 @@ python get_acceleration.py
   
   def set_free_fall_dur(self,dur)  
     '''
-      @brief Set the free fall time, or the numbers of free-fall samples. In a measurement, it will not be determined as a free fall event unless the samples are enough. 
+      @brief Set the free fall time, or the numbers of free-fall samples. In a measurement, it will not be determined as a free fall event unless the @n samples are enough. 
       @param dur duration, range: 0~31
       @n time = dur * (1/rate)(unit:s)
       @n|                   An example of a linear relationship between an argument and time                                     |
@@ -343,7 +346,6 @@ python get_acceleration.py
       @n          WAKEUP        #Wake-up event
       @n          SINGLE_TAP    #Single tap event
       @n          IA6D          #An event that changes the status of facing up/down/left/right/forward/back
-      
     '''
   
   def set_wakeup_dur(self,dur)  
@@ -435,8 +437,8 @@ python get_acceleration.py
     '''
       @brief Set the tap detection mode, detect single tap or detect both single tap and double tap
       @param mode  Tap detection mode
-                      ONLY_SINGLE        #Detect single tap
-                      BOTH_SINGLE_DOUBLE #Detect both single tap and double tap
+      @n           ONLY_SINGLE        #Detect single tap
+      @n           BOTH_SINGLE_DOUBLE #Detect both single tap and double tap
     '''
   
   def set_6d_threshold(self,degree)
@@ -659,4 +661,4 @@ Raspberry Pi              |      √         |            |             |
 
 ## Credits
 
-Written by(li.feng@dfrobot.com), 2021. (Welcome to our [website](https://www.dfrobot.com/))
+Written by(li.feng@dfrobot.com,jie.tang@dfrobot.com), 2021. (Welcome to our [website](https://www.dfrobot.com/))

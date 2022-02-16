@@ -10,7 +10,7 @@
  * @n       Leonardo(3), microbit(P0),FireBeetle-ESP8266(D6),FireBeetle-ESP32((D6),FireBeetle-M0(6)        
  * @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
  * @license     The MIT License (MIT)
- * @author [fengli](li.feng@dfrobot.com)
+ * @author [tangjie](jie.tang@dfrobot.com)
  * @version  V1.0
  * @date  2021-01-16
  * @url https://github.com/DFRobot/DFRobot_LIS

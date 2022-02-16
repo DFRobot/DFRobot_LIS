@@ -60,8 +60,8 @@ public:
 public:
 
 /**
-  Power mode selection, determine the frequency of data collection
-  Represents the number of data collected per second
+ * @fn  ePowerMode_t
+ * @brief  Power mode selection, determine the frequency of data collection Represents the number of data collected per second
  */
 typedef enum{
    ePowerDown_0HZ = 0,/*Measurement off*/
@@ -77,7 +77,8 @@ typedef enum{
 }ePowerMode_t;
 
 /**
-  Sensor range selection
+ * @fn  eRange_t
+ * @brief Sensor range selection
  */
 typedef enum{
   eH3lis200dl_100g = 100,/**< ±100g>*/
@@ -90,7 +91,8 @@ typedef enum{
 }eRange_t;
 
 /**
- * @n                        High-pass filter cut-off frequency configuration
+ * @fn eHighPassFilter_t
+ * @brief                        High-pass filter cut-off frequency configuration
  * @n |--------------------------------------------------------------------------------------------------------|
  * @n |                |    ft [Hz]      |        ft [Hz]       |       ft [Hz]        |        ft [Hz]        |
  * @n |   mode         |Data rate = 50 Hz|   Data rate = 100 Hz |  Data rate = 400 Hz  |   Data rate = 1000 Hz |
@@ -113,7 +115,8 @@ typedef enum{
 }eHighPassFilter_t;
 
 /**
-  Interrupt event
+ * @fn eInterruptEvent_t
+ * @brief Interrupt event
  */
 typedef enum{
   eXLowerThanTh = 0x1,    /**<The acceleration in the x direction is less than the threshold>*/
@@ -126,7 +129,8 @@ typedef enum{
 }eInterruptEvent_t;
 
 /**
-  Interrupt pin selection
+ * @fn  eInterruptSource_t
+ * @brief Interrupt pin selection
  */
 typedef enum{
   eINT1 = 0, /**<int1 >*/

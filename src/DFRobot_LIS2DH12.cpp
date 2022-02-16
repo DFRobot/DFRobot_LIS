@@ -12,7 +12,7 @@
 #include "DFRobot_LIS2DH12.h"
 
 
-DFRobot_LIS2DH12::DFRobot_LIS2DH12(TwoWire * pWire,uint8_t addr)
+DFRobot_LIS2DH12::DFRobot_LIS2DH12(TwoWire *pWire,uint8_t addr)
 {
   _deviceAddr = addr;
   _pWire = pWire;
@@ -26,7 +26,7 @@ bool DFRobot_LIS2DH12::begin(void)
   _reset = 1;
   readReg(REG_CARD_ID,&identifier,1);
   DBG(identifier);
-  if(identifier = 0x33){
+  if(identifier == 0x33){
     ret = true;
   }else if(identifier == 0 || identifier == 0xff){
     DBG("Communication failure");
@@ -81,7 +81,6 @@ int32_t DFRobot_LIS2DH12::readAccZ()
 
 void DFRobot_LIS2DH12::setRange(eRange_t range)
 {
-  _mgScaleVel = range;
   switch(range){
     case eLIS2DH12_2g:
       _mgScaleVel = 16;
@@ -102,7 +101,7 @@ void DFRobot_LIS2DH12::setRange(eRange_t range)
 
 void DFRobot_LIS2DH12::setAcquireRate(ePowerMode_t rate)
 {
-  uint16_t reg = 0x0f;
+  uint8_t reg = 0x0f;
   reg = reg | rate;
   DBG(reg);
   writeReg(REG_CTRL_REG1,&reg,1);
@@ -110,12 +109,12 @@ void DFRobot_LIS2DH12::setAcquireRate(ePowerMode_t rate)
 
 uint8_t DFRobot_LIS2DH12::getID()
 {
-  uint16_t identifier; 
+  uint8_t identifier; 
   readReg(REG_CARD_ID,&identifier,1);
   return identifier;
 }
 
-uint8_t DFRobot_LIS2DH12::writeReg(uint8_t reg, const void * pBuf, size_t size)
+void DFRobot_LIS2DH12::writeReg(uint8_t reg, const void * pBuf, size_t size)
 {
   if(pBuf == NULL){
 	  DBG("pBuf ERROR!! : null pointer");

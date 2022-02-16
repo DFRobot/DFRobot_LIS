@@ -448,10 +448,10 @@ IIS2DH12            |      √       |              |
    * @fn setRange
    * @brief 设置范围
    * @param range 量程
-   *               eLIS2DH12_2g /<±2g>/
-   *               eLIS2DH12_4g /<±4g>/
-   *               eLIS2DH12_8g /<±8g>/
-   *               eLIS2DH12_16g /<±16g>/
+   * @n     eLIS2DH12_2g /<±2g>/
+   * @n     eLIS2DH12_4g /<±4g>/
+   * @n     eLIS2DH12_8g /<±8g>/
+   * @n     eLIS2DH12_16g /<±16g>/
    */
   void setRange(eRange_t range);
   
@@ -597,6 +597,7 @@ IIS2DH12            |      √       |              |
   eTap_t tapDetect();
   
   /**
+   * @fn getTapDirection
    * @brief 抽头方向源检测
    * @return   eDirXUp   /<在X的正方向检测到Tap>/
    * @n        eDirXDown /<在X的负方向检测到Tap>/
@@ -608,6 +609,7 @@ IIS2DH12            |      √       |              |
   eTapDir_t getTapDirection();
   
   /**
+   * @fn getWakeUpDir
    * @brief 唤醒运动方向检测
    * @return   eDirX    /<芯片被X方向的运动唤醒>/
    * @n        eDirY    /<芯片被Y方向的运动唤醒>/
@@ -617,6 +619,7 @@ IIS2DH12            |      √       |              |
   eWakeUpDir_t getWakeUpDir();
   
   /**
+   * @fn demandData
    * @brief 在单数据转换按需模式下，请求测量。
    */
   void demandData();

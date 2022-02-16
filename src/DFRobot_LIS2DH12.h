@@ -14,6 +14,7 @@
 
 #include "Arduino.h"
 #include <Wire.h>
+#include <SPI.h>
 
 //#define ENABLE_DBG
 
@@ -49,12 +50,11 @@ public:
   #define REG_INT1_SRC     0x31     ///<Interrupt source 1 status register
   #define REG_INT2_SRC     0x35     ///<Interrupt source 2 status register
   
-
 public:
 
 /**
- * Power mode selection, determine the frequency of data collection
- * Represents the number of data collected per second
+ * @fn  ePowerMode_t
+ * @brief  Power mode selection, determine the frequency of data collection Represents the number of data collected per second
  */
 typedef enum{
     ePowerDown_0Hz  = 0,
@@ -68,7 +68,8 @@ typedef enum{
 }ePowerMode_t;
 
 /**
- * Sensor range selection
+ * @fn  eRange_t
+ * @brief  Sensor range selection
  */
 typedef enum{
     eLIS2DH12_2g = 0x00,/**<±2g>*/
@@ -78,7 +79,8 @@ typedef enum{
 }eRange_t;
 
 /**
-  Interrupt event
+ * @fn  eInterruptEvent_t
+ * @brief  Interrupt event
  */
 typedef enum{
   eXLowerThanTh = 0x01,    /**<The acceleration in the x direction is less than the threshold>*/
@@ -91,7 +93,8 @@ typedef enum{
 }eInterruptEvent_t;
 
 /**
-  Interrupt pin selection
+ * @fn  eInterruptSource_t
+ * @brief  Interrupt pin selection
  */
 typedef enum{
   eINT1 = 0, /**<int1 >*/
@@ -244,9 +247,8 @@ public:
    * @param reg register
    * @param pBuf  buf for store data to write 
    * @param size  The number of the data in pBuf
-   * @return The number of successfully sent data
    */
-  uint8_t  writeReg(uint8_t reg,const void *pBuf,size_t size); 
+  void  writeReg(uint8_t reg,const void *pBuf,size_t size); 
 
 private:
   uint8_t _deviceAddr;

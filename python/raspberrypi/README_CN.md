@@ -1,4 +1,7 @@
 # DFRobot_LIS
+
+* [English Version](./README.md)
+  
 H3LIS200DL是一款低功耗、高性能的3轴线性加速度计
 属于“纳米”家族，具有数字I2C/SPI
 串行接口标准输出。
@@ -171,13 +174,13 @@ python get_acceleration.py
   '''
     @brief 检查中断1中是否产生中断事件'event' 
     @param event Interrupt event
-             X_LOWERTHAN_TH   #x方向的加速度小于阈值
-             X_HIGHERTHAN_TH  #x方向的加速度大于阈值
-             Y_LOWERTHAN_TH   #y方向的加速度小于阈值
-             Y_HIGHERTHAN_TH  #y方向的加速度大于阈值
-             Z_LOWERTHAN_TH   #z方向的加速度小于阈值
-             Z_HIGHERTHAN_TH  #z方向的加速度大于阈值
-             EVENT_ERROR      #没有事件
+    @n     X_LOWERTHAN_TH   #x方向的加速度小于阈值
+    @n     X_HIGHERTHAN_TH  #x方向的加速度大于阈值
+    @n     Y_LOWERTHAN_TH   #y方向的加速度小于阈值
+    @n     Y_HIGHERTHAN_TH  #y方向的加速度大于阈值
+    @n     Z_LOWERTHAN_TH   #z方向的加速度小于阈值
+    @n     Z_HIGHERTHAN_TH  #z方向的加速度大于阈值
+    @n     EVENT_ERROR      #没有事件
     @return True(事件产生)/False(事件没有产生)
   '''       
   
@@ -592,28 +595,28 @@ def begin(self)
     '''!
       @brief 使能中断
       @param source 中断引脚选择
-              INT_1 = 0,/<int1 >/
-              INT_2,/<int2>/
+      @n        INT_1 = 0,/<int1 >/
+      @n        INT_2,/<int2>/
       @param event 中断选择
-                   X_LOWERTHAN_TH ,/<x方向上的加速度小于阈值>/
-                   X_HIGHERTHAN_TH ,/<x方向上的加速度小于阈值>/
-                   Y_LOWERTHAN_TH,/<x方向上的加速度小于阈值>/
-                   Y_HIGHERTHAN_TH,/<x方向上的加速度小于阈值>/
-                   Z_LOWERTHAN_TH,/<x方向上的加速度小于阈值>/
-                   Z_HIGHERTHAN_TH,/<x方向上的加速度小于阈值>/
+      @n           X_LOWERTHAN_TH ,/<x方向上的加速度小于阈值>/
+      @n           X_HIGHERTHAN_TH ,/<x方向上的加速度小于阈值>/
+      @n           Y_LOWERTHAN_TH,/<x方向上的加速度小于阈值>/
+      @n           Y_HIGHERTHAN_TH,/<x方向上的加速度小于阈值>/
+      @n           Z_LOWERTHAN_TH,/<x方向上的加速度小于阈值>/
+      @n           Z_HIGHERTHAN_TH,/<x方向上的加速度小于阈值>/
     '''
 
   def get_int1_event(self, event)
     '''!
       @brief 检查中断1中是否产生中断事件'event'  
       @param event 中断事件
-                   X_LOWERTHAN_TH ,/<x方向上的加速度小于阈值>/
-                   X_HIGHERTHAN_TH ,/<x方向上的加速度大于阈值>/
-                   Y_LOWERTHAN_TH,/<y方向上的加速度小于阈值>/
-                   Y_HIGHERTHAN_TH,/<y方向上的加速度大于阈值>/
-                   Z_LOWERTHAN_TH,/<z方向上的加速度小于阈值>/
-                   Z_HIGHERTHAN_TH,/<z方向上的加速度大于阈值>/
-    @return true 产生/false 没有产生
+      @n           X_LOWERTHAN_TH ,/<x方向上的加速度小于阈值>/
+      @n           X_HIGHERTHAN_TH ,/<x方向上的加速度大于阈值>/
+      @n           Y_LOWERTHAN_TH,/<y方向上的加速度小于阈值>/
+      @n           Y_HIGHERTHAN_TH,/<y方向上的加速度大于阈值>/
+      @n           Z_LOWERTHAN_TH,/<z方向上的加速度小于阈值>/
+      @n           Z_HIGHERTHAN_TH,/<z方向上的加速度大于阈值>/
+      @return true 产生/false 没有产生
     '''
 
   def get_int2_event(self, event)
@@ -660,4 +663,4 @@ Raspberry Pi              |      √         |            |             |
 
 ## 创作者
 
-Written by(li.feng@dfrobot.com), 2021. (Welcome to our [website](https://www.dfrobot.com/))
+Written by(li.feng@dfrobot.com,jie,tang@dfrobot.com), 2021. (Welcome to our [website](https://www.dfrobot.com/))

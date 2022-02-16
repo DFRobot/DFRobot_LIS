@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 '''!
-  @file getAcceleration.ino
+  @file getAcceleration.py
   @brief Get the acceleration in the three directions of xyz, the range can be
   @copyright  Copyright (c) 2010 DFRobot Co.Ltd (http://www.dfrobot.com)
   @license     The MIT License (MIT)
@@ -14,10 +14,6 @@ import sys
 sys.path.append("../..") # set system path to top
 from DFRobot_LIS2DH12 import *
 import time
-
-#If you want to use SPI to drive this module, uncomment the codes below, and connect the module with Raspberry Pi via SPI port.
-#RASPBERRY_PIN_CS =  27              #Chip selection pin when SPI is selected, use BCM coding method, the number is 27, corresponding to pin GPIO2
-#acce = DFRobot_LIS331HH_SPI(RASPBERRY_PIN_CS)
 
 
 #If you want to use I2C to drive this module, uncomment the codes below, and connect the module with Raspberry Pi via I2C port.

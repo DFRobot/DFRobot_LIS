@@ -368,7 +368,8 @@ To use this library, first download the library file, paste it into the \Arduino
   
   /**
    * @fn setFreeFallDur
-   * @brief Set the free fall time, or the number of free-fall samples. In a measurement, it will not be determined as a free fall event unless the samples are enough.
+   * @brief Set the free fall time, or the number of free-fall samples. In a measurement, it will not be determined as a free fall event 
+   * @n     unless the samples are enough.
    * @param dur Freefall samples, range：0~31
    * @n time = dur * (1/rate)(unit:s)
    * @n  |                            An example of a linear relationship between an argument and time                            |
@@ -405,7 +406,8 @@ To use this library, first download the library file, paste it into the \Arduino
   /**
    * @fn setWakeUpDur
    * @brief Set wake-up duration, when using the detection mode of eDetectAct in setActMode() function, it will collect data at a normal rate
-   * @n     after the chip is awakened. Then after a period of time, the chip will continue to hibernate, collecting data at a frequency of 12.5hz.
+   * @n     after the chip is awakened. Then after a period of time, the chip will continue to hibernate, collecting data at a frequency of 
+   * @n     12.5hz.
    * @param dur duration,range: 0~3
    * @n time = dur * (1/rate)(unit:s)
    * @n  |                           An example of a linear relationship between an argument and time                             |
@@ -428,7 +430,8 @@ To use this library, first download the library file, paste it into the \Arduino
   /**
    * @fn setActMode
    * @brief Set the mode of motion detection, the first mode will not detect whether the module is moving; the second, once set, will measure data at a lower 
-   * @n frequency to save consumption, and return to normal after detecting motion; the third can only detect whether the module is in sleep state.
+   * @n frequency to save consumption, and return to normal after detecting motion; the third can only detect whether the module is in sleep 
+   * @n state.
    * @param mode Motion detection mode
    * @n          eNoDetection         /<No detection>/
    * @n          eDetectAct           /<Detect movement,the chip automatically goes to 12.5 Hz rate in the low-power mode>/
@@ -517,7 +520,8 @@ To use this library, first download the library file, paste it into the \Arduino
 
   /**
    * @fn set6DThreshold
-   * @brief Set Thresholds for 4D/6D, when the threshold of rotation exceeds the specified angle, a direction change event will occur.
+   * @brief Set Thresholds for 4D/6D, when the threshold of rotation exceeds the specified angle, a direction change event 
+   * @n     will occur.
    * @param degree   eDegrees80   /<80°>/
    * @n              eDegrees70   /<70°>/
    * @n              eDegrees60   /<60°>/
@@ -569,7 +573,8 @@ To use this library, first download the library file, paste it into the \Arduino
   
   /**
    * @fn getOrientation
-   * @brief Only in 6D (facing up/down/left/right/forward/backward) state can the function get the orientation of the sensor relative to the positive z-axis.
+   * @brief Only in 6D (facing up/down/left/right/forward/backward) state can the function get the orientation of the 
+   * @n sensor relative to the positive z-axis.
    * @return    eXDown  /<X is now down>/
    * @n         eXUp    /<X is now up>/
    * @n         eYDown  /<Y is now down>/
