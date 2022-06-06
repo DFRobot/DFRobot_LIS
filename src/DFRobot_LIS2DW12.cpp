@@ -691,6 +691,7 @@ uint8_t DFRobot_LIS2DW12_I2C::writeReg(uint8_t reg, const void * pBuf, size_t si
     _pWire->write(_pBuf[i]);
   }
   _pWire->endTransmission();
+ return 1;
 }
 
 uint8_t DFRobot_LIS2DW12_I2C::readReg(uint8_t reg, uint8_t* pBuf, size_t size)
@@ -770,5 +771,5 @@ uint8_t  DFRobot_LIS2DW12_SPI::writeReg(uint8_t reg,const void *pBuf,size_t size
   }
   SPI.endTransaction();
   digitalWrite(_cs,1);
-
+  return 1;
 }
