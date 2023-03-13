@@ -154,7 +154,7 @@ bool DFRobot_H3LIS200DL_I2C::begin(void)
 bool DFRobot_H3LIS200DL_I2C::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &accz)
 {
   uint8_t reg = 0;
-  uint8_t sensorData[3];
+  uint8_t sensorData[6];
   readReg(REG_STATUS_REG,&reg,1);
   if((reg & 0x01) == 1){
     for(uint8_t i = 0 ;i<6;i++){
@@ -269,7 +269,7 @@ bool DFRobot_H3LIS200DL_SPI::begin(void){
 bool DFRobot_H3LIS200DL_SPI::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &accz)
 {
   uint8_t reg = 0;
-  uint8_t sensorData[3];
+  uint8_t sensorData[6];
   readReg(REG_STATUS_REG,&reg,1);
   if((reg & 0x01) == 1){
     for(uint8_t i = 0 ;i<6 ;i++){
@@ -390,7 +390,7 @@ bool DFRobot_LIS331HH_I2C::begin(void)
 bool DFRobot_LIS331HH_I2C::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &accz)
 {
   uint8_t reg = 0;
-  uint8_t sensorData[3];
+  uint8_t sensorData[6];
   int32_t a,b,c;
   readReg(REG_STATUS_REG,&reg,1);
   if((reg & 0x01) == 1){
@@ -540,7 +540,7 @@ bool DFRobot_LIS331HH_SPI::begin(void){
 bool DFRobot_LIS331HH_SPI::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &accz)
 {
   uint8_t reg = 0;
-  uint8_t sensorData[3];
+  uint8_t sensorData[6];
   int32_t a,b,c;
   readReg(REG_STATUS_REG,&reg,1);
   if((reg & 0x01) == 1){

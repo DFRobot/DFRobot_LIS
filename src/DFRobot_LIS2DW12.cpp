@@ -511,6 +511,7 @@ DFRobot_LIS2DW12::eOrient_t DFRobot_LIS2DW12::getOrientation()
   } else if((value & 0x20) > 0){
      return eZUp;
   }
+  return eNONE;
 }
 DFRobot_LIS2DW12::eTap_t DFRobot_LIS2DW12::tapDetect()
 {

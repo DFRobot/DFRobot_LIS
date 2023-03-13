@@ -239,6 +239,7 @@ typedef enum {
   eYUp   = 3 , /**<Y is now up>*/
   eZDown = 4 , /**<Z is now down>*/
   eZUp   = 5 , /**<Z is now up>*/
+  eNONE,
 } eOrient_t;
 
 public:
