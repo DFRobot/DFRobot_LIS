@@ -446,10 +446,10 @@ int32_t DFRobot_LIS331HH_I2C::readAccX(){
   readReg(REG_OUT_X_L,&sensorData[0],1);
   readReg(REG_OUT_X_L+1,&sensorData[1],1);
   
-  a = (int32_t)(sensorData[1]*256+sensorData[0]);
+  a = ((int8_t)sensorData[1])*256+sensorData[0];
   //Serial.println(a);
   #if defined(__AVR__) 
-    a = (a*((uint8_t)_range))/32;
+    a = -(a*((uint8_t)_range))/32;
   #else 
     a = (a*((uint8_t)_range))/32;
   #endif
