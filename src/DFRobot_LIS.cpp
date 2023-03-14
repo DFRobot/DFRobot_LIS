@@ -398,11 +398,12 @@ bool DFRobot_LIS331HH_I2C::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &a
       readReg(REG_OUT_Z_H+i,&sensorData[i],1);
     }
     a = ((int8_t)sensorData[1])*256+(int8_t)sensorData[0];
-    accx = (a * 1000 * (uint32_t)_range)/(32768);
+    accx = (a * 1000 * (uint8_t)_range)/(32768);
+    //Serial.println(accx);
     b = ((int8_t)sensorData[3])*256+(int8_t)sensorData[2];
-    accy = (b * 1000 * (uint32_t)_range)/(32768);
+    accy = (b * 1000 * (uint8_t)_range)/(32768);
     c = ((int8_t)sensorData[5])*256+(int8_t)sensorData[4];
-    accz = (c * 1000 * (uint32_t)_range)/(32768);
+    accz = (c * 1000 * (uint8_t)_range)/(32768);
     return true;
   }
 return false;
@@ -444,14 +445,15 @@ int32_t DFRobot_LIS331HH_I2C::readAccX(){
   readReg(REG_STATUS_REG,&reg,1);
   readReg(REG_OUT_X_L,&sensorData[0],1);
   readReg(REG_OUT_X_L+1,&sensorData[1],1);
-
-  a = ((int8_t)sensorData[1])*256+sensorData[0];
+  
+  a = (int32_t)(sensorData[1]*256+sensorData[0]);
+  //Serial.println(a);
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint32_t)_range)/(32768);
+    a = (a*((uint8_t)_range))/32;
   #else 
-    a = (a * 1000 * (uint32_t)_range)/(32768);
+    a = (a*((uint8_t)_range))/32;
   #endif
-
+  //Serial.println((int32_t)a);
   return a;
 }
 int32_t DFRobot_LIS331HH_I2C::readAccY(){
@@ -465,9 +467,9 @@ int32_t DFRobot_LIS331HH_I2C::readAccY(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint32_t)_range)/(32768);
+    a = -(a * 1000 * (uint8_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint32_t)_range)/(32768);
+    a = (a * 1000 * (uint8_t)_range)/(32768);
   #endif
 
      return a;
@@ -482,9 +484,9 @@ int32_t DFRobot_LIS331HH_I2C::readAccZ(){
 
   a = ((int8_t)sensorData[1])*256+sensorData[0];
   #if defined(__AVR__) 
-    a = -(a * 1000 * (uint32_t)_range)/(32768);
+    a = -(a * 1000 * (uint8_t)_range)/(32768);
   #else 
-    a = (a * 1000 * (uint32_t)_range)/(32768);
+    a = (a * 1000 * (uint8_t)_range)/(32768);
   #endif
      return a;
 }
@@ -551,6 +553,7 @@ bool DFRobot_LIS331HH_SPI::getAcceFromXYZ(int32_t &accx,int32_t &accy,int32_t &a
     }
     a = ((int8_t)sensorData[1])*256+(int8_t)sensorData[0];
     accx = (a * 1000 * (uint8_t)_range)/(32768);
+    
     b = ((int8_t)sensorData[3])*256+(int8_t)sensorData[2];
     accy = (b * 1000 * (uint8_t)_range)/(32768);
     c = ((int8_t)sensorData[5])*256+(int8_t)sensorData[4];
