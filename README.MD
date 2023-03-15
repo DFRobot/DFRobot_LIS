@@ -52,7 +52,7 @@ H3LIS200DL          |      √       |              |
 LIS331HH            |      √       |              |  
 LIS2DW12            |      √       |              |             
 IIS2DLPC            |      √       |              |  
-IIS2DH12            |      √       |              |             
+IS2DH12            |      √       |              |             
 
 ![产品效果图片](./resources/images/SEN0405_TOP.jpg)
 ![产品效果图片](./resources/images/SEN0407_TOP.jpg)
